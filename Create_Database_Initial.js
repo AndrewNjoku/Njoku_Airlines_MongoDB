@@ -1,6 +1,8 @@
 
 var MongoClient = require('mongodb').MongoClient;
 
+var ObjectId = require('mongodb');
+
 var url = "mongodb://localhost:27017/mydb";
 
 // This is the base script to be used to populate my database. It excludes customer bookings since i wish to tie the bookings to existing fields populated in this document.
@@ -150,6 +152,7 @@ MongoClient.connect(url, function(err, db) {
   var flight9id = ObjectId().toString();
   var flight10id = ObjectId().toString();
   var flight11id = ObjectId().toString();
+  var flight12id = ObjectId().toString();
   
   
 
@@ -210,7 +213,7 @@ dbo.collection("airports").insertMany(myAirports, function(err, res){
 	console.log("Airports Inserted" + res.insertedCount)
 	
 	
-})
+});
 
 
 // i will output the plain ID via the terminal , but can be output to a document. This is for use by me so i have a list of ids in order to add 
@@ -221,7 +224,7 @@ dbo.collection("planes").insertMany(planes, {w:1}, function(err, res){
 	console.log("Planes Inserted" + res.insertedCount)
 	
 	
-})
+});
 
 
 
@@ -231,7 +234,7 @@ dbo.collection("planes").insertMany(planes, {w:1}, function(err, res){
  	
  	console.log("flights Inserted" + res.insertedCount)	
  	
- })
+ });
  
  
  
@@ -242,7 +245,7 @@ dbo.collection("planes").insertMany(planes, {w:1}, function(err, res){
 	console.log("bookings inserted" + res.insertedCount)
 	
 	
-})
+});
  
 
 
