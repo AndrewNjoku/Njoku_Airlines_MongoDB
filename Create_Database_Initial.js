@@ -20,14 +20,23 @@ MongoClient.connect(url, function(err, db) {
   
   
   
+  
+  //quick function to generate ID's so i dont have to assign myself
+  
+  function idgenerator(max) {
+	  return Math.floor(Math.random() * Math.floor(max));
+	}
+  
+  
+  
   //Pilots are assigned to planes if they are available and they also take a few hours break and will also fly the plane back.
   //will assign custom objectID to pilot fields in order to join them relationally with flights and flights with booking.
   
-  var johnpilotid = ObjectId().toString();
-  var peterpilotid = ObjectId().toString();
-  var amypilotid = ObjectId().toString();
-  var hannahpilotid= ObjectId().toString();
-  var michaelpilotid = ObjectId().toString();
+  var johnpilotid = idgenerator(9999);
+  var peterpilotid = idgenerator(9999);
+  var amypilotid = idgenerator(9999);
+  var hannahpilotid= idgenerator(9999);
+  var michaelpilotid = idgenerator(9999);
   
   
   var myEmployees = [
@@ -91,15 +100,15 @@ MongoClient.connect(url, function(err, db) {
 
   // going to create some custom IDs for these planes
   
-  var plane1 = ObjectId().toString();
-  var plane2 = ObjectId().toString();
-  var plane3 = ObjectId().toString();
-  var plane4 = ObjectId().toString();
-  var plane5 = ObjectId().toString();
-  var plane6 = ObjectId().toString();
-  var plane7 = ObjectId().toString();
-  var plane8 = ObjectId().toString();
-  var plane9 = ObjectId().toString();
+  var plane1 = idgenerator(9999);
+  var plane2 = idgenerator(9999);
+  var plane3 = idgenerator(9999);
+  var plane4 = idgenerator(9999);
+  var plane5 = idgenerator(9999);
+  var plane6 = idgenerator(9999);
+  var plane7 = idgenerator(9999);
+  var plane8 = idgenerator(9999);
+  var plane9 = idgenerator(9999);
   
   
   var planes = [
@@ -141,18 +150,18 @@ MongoClient.connect(url, function(err, db) {
   
   //these ids are only used for relating documents via queries and as such can be stored as strings
   
-  var flight1id = ObjectId().toString();
-  var flight2id = ObjectId().toString();
-  var flight3id = ObjectId().toString();
-  var flight4id = ObjectId().toString();
-  var flight5id = ObjectId().toString();
-  var flight6id = ObjectId().toString();
-  var flight7id = ObjectId().toString();
-  var flight8id = ObjectId().toString();
-  var flight9id = ObjectId().toString();
-  var flight10id = ObjectId().toString();
-  var flight11id = ObjectId().toString();
-  var flight12id = ObjectId().toString();
+  var flight1id = idgenerator(9999);
+  var flight2id = idgenerator(9999);
+  var flight3id = idgenerator(9999);
+  var flight4id = idgenerator(9999);
+  var flight5id = idgenerator(9999);
+  var flight6id = idgenerator(9999);
+  var flight7id = idgenerator(9999);
+  var flight8id = idgenerator(9999);
+  var flight9id = idgenerator(9999);
+  var flight10id = idgenerator(9999);
+  var flight11id = idgenerator(9999);
+  var flight12id = idgenerator(9999);
   
   
 
@@ -176,7 +185,7 @@ MongoClient.connect(url, function(err, db) {
   	 {date_time:'03/10/2018', Booke_name:'Cassandra Nevermind',           Passengers:'Cassandra Nevermind',                             Journey:{flight_id:flight1id, flight_clas:'First', seat:'3a'}, cost: 10000 },
   	 {date_time:'03/10/2018', Booke_name:'Bethany Chowdary',              Passengers:'Liam Chowdry,Timothey Chowdry',                   Journey:{flight_id:flight4id,flight_clas:'Economy', seat:'12t,12r'}, cost: 790 },
   	 {date_time:'04/10/2018', Booke_name:'Sandra White',                  Passengers:'Sandra White',                                    Journey:[{flight_id:flight1id, flight_clas:'Economy', seat:'12t'}, {flight_id:flight1id, flight_clas:'Economy', seat:'12t'}], cost: 800 },
-  	 {date_time:'07/10/2018', Booke_name:'Andrew Whitmore',               Passengers:'Andrew Whitmore, Stacy Whitmore',                 Journey:{flight_id:flight4idflight9id, flight_clas:'Economy', seat:'12t,5i'}, cost: 10000 },
+  	 {date_time:'07/10/2018', Booke_name:'Andrew Whitmore',               Passengers:'Andrew Whitmore, Stacy Whitmore',                 Journey:{flight_id:flight9id, flight_clas:'Economy', seat:'12t,5i'}, cost: 10000 },
   	 {date_time:'12/10/2018', Booke_name:'Bonjovi Preeti',                Passengers:'Bonjovi Preeti, Mary-Amme Preeti',                Journey:[{flight_id:flight5id, flight_clas:'Economy', seat:'3a,3b'},{flight_id:flight4id, flight_clas:'Business', seat:'12b,12c'}], cost: 10000 },
   	 {date_time:'20/10/2018', Booke_name:'Micheal Daphne',                Passengers:'Petra Vodoplav',                                  Journey:{flight_id:flight6id,  flight_clas:'First', seat:'10f'}, cost:250 },
   	 {date_time:'0/10/2018',  Booke_name:'Crocodile Dundee',              Passengers:'Jibola Babatunde,Mary Babatunde,Crocodile Dundee', Journey:{flight_id:flight12id,flight_clas:'First', seat:'3a,3b,3c'}, cost: 10000 },
