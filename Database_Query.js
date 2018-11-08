@@ -30,20 +30,34 @@ MongoClient.connect(url, function(err, db) {
   
   // Holds the the employees pay. The business is assumed to have started beginning of October and 
   //we are going through a trial period through November and december. Employees are currently on
-  //wage which will increase when the business starts flying i will need to account for this.
+  //we will calculate the estimate of prophets based on PREBOKKINGS from customers, fixed costs such as 
+  //rent and employee salaryand fuel cost for the prebooked flights. the estimations will be facility
+  //upkeep + vehicle maintainence etc
   
   
   // Global variables 
   
-  var employeepaytraining=0;
 
-  var employeepaytrading=0;
 
-  var rentoffacilities=0;
+  var TotalYearlySalary;
+  
+  var TotalMonthlySalary=TotalYearlySalary/12;
+  
+  // we will give a wild number to this since i have no idea
 
-  var upkeepestimate=0;
+  var rentoffacilitiespermonth=10000;
 
-  var vehiclemaintainenceestimate=0;
+  var upkeepestimate=2000;
+
+  var vehiclemaintainenceestimate=2000;
+  
+  
+
+
+  // The price of jet fuel as of January 2015 is as follows:
+  // found estimate saying that boeing B747 consumes 12 liters of fuel per Kilometer
+   // 1 litre = 0.3125 pence (pound sterling)
+ 
 
   var fuelaccurateestimate=0;
   
@@ -69,19 +83,65 @@ MongoClient.connect(url, function(err, db) {
 	  
  };
  
+ function add(a, b) {
+	    return a + b;
+	}
  
  
- //Main functions to interact with 
  
 
  
- function calculateWagePerMonth(){
+ var ArrayOfYearlySalary= [];
+ 
+
+ 
+ //Main functions to interact with 
+ // this deals with querying wage and getting some useful info out of the result
+ 
+ // namely creating an array that holds all of the yearly wages printing this array
+ 
+ //then calculating the total and printing also
+ 
+ 
+ function calculateTotalFuelCostEstimate(){
+	 
+	 
+	 //first we need to get the total number of KM booked for travel
+	 dbo.collection("flights").find({}, {projection})
+	 
+	 
+	 
+	 
+	 
+ };
+ 
+ 
+ function calculateWagePerYear(){
 	 
 	  dbo.collection("employees").find({}, { projection: { _id: 0, name: 1, salary: 1 } }).toArray(function(err, result) {
 		    if (err) throw err;
 		    
 		    
-		   print(result)
+		    print(result);
+		    
+		    //Push each salary into an array called : ArrayOfYearlySalary above
+		  
+		    result.forEach(	
+		    		
+		      function(row) {
+		         ArrayOfYearlySalary.push(row.salary);
+		      });
+		    
+		    
+		    
+		   print(ArrayOfYearlySalary);
+		   
+		   
+		   TotalYearlySalary=ArrayOfYearlySalary.reduce(add, 0);
+		   
+		   
+		   print (" The total yearly salary of the employees above is"+TotalYearlySalary);   
+		   	   
      
 	  });
  };
@@ -90,9 +150,11 @@ MongoClient.connect(url, function(err, db) {
  
  
 
-//test1
-  
-calculateWagePerMonth();
+//Prints all employees names and their salary,
+ //Their salary in an arryay
+ //the result of the addition of everyone salary yearly
+ 
+calculateWagePerYear();
   
   
   
