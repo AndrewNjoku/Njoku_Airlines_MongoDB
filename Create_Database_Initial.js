@@ -13,7 +13,7 @@ var url = "mongodb://localhost:27017/mydb";
 
 MongoClient.connect(url, function(err, db) {
   if (err) throw err;
-  console.log("Database created!");
+  console.log("Database connection complete!");
   
   
   var dbo = db.db("mydb");
@@ -82,7 +82,17 @@ MongoClient.connect(url, function(err, db) {
 	                 {name: ' Charles Digor', location: ' Paris,France', ruc: 59},
 	                 {name: ' Gatwick', location: ' London,England', ruc: 87},
 	                 {name: ' Nikola Tesla', location: ' Belgrade,Serbia', ruc: 40},
-	                 {name: ' Bangor', location: ' Bangor, Wales', ruc: 100}]
+	                 {name: ' Bangor', location: ' Bangor, Wales', ruc: 100},
+	                 {name: ' Dubai International', location: ' Dubai,UAE', ruc: 100},
+	                 {name: ' LAX', location: ' California,USA', ruc: 59},
+	                 {name: ' PEK', location: ' Beijing,China', ruc: 87},
+	                 {name: ' Frankfurt International', location: ' Belgrade,Serbia', ruc: 40},
+	                 {name: ' AMS', location: ' Amsterdam, Netherlands', ruc: 100},
+	                 {name: ' Singapore Changore', location: ' Singapore, Singapore', ruc: 100},
+	                 {name: ' SFO', location: ' San Francisco,USA', ruc: 59},
+	                 {name: ' Munich', location: ' Munich,England', ruc: 87},
+	                 {name: ' Adolfo-Suarez', location: ' Madrid,Spain', ruc: 40},
+	                 {name: ' Toronto-Pearson', location: ' Toronto, Canada', ruc: 100}]
   
   // Decided to create a collection just for planes as the only other use of planes in this database will be
   //in the flight information. It is also important to store details of planes fro safety resons 
@@ -115,13 +125,13 @@ MongoClient.connect(url, function(err, db) {
 	  
 	  { plane_id: plane1,make: 'Boeing', model: '737-800',mileage:10000, range:5665, location: "Heathrow",last_service:'17/07/2017',status:'active'},
 	  {plane_id: plane2,make: ' Boeing', model: '767-300ER',flight_cycles:34000, range:10000, location:"Heathrow",last_service:'17/07/2013',status: 'active', notes: "decomission due in 1000 miles, keep an eye"},
-	  {plane_id: plane3,make: ' Boeing', model: '737-800',flight_cycles:34000, range:5665, location:"Heathrow",last_service:'17/07/2011',status: 'active'},
-	  {plane_id: plane4,make: ' Boeing', model: '737-800',flight_cycles:10000, range:5665, location: "Heathrow",last_service:'17/07/2017',status: 'active', notes:" returning to service on 12/12/2018 "},
-	  {plane_id: plane5,make: ' Boeing', model: '747-830',flight_cycles:10000, range:10000, location: "Heathrow",last_service:'17/07/2017',status:'active'},
-	  {plane_id: plane6,make: ' Boeing', model: '737-800',flight_cycles:10000, range:5665 , location:"Heathrow",last_service:'17/07/2017',status: 'active'},
-	  {plane_id: plane7,make: ' Boeing', model: '747-400',flight_cycles:10000, range:8357,location: "Heathrow",last_service:'17/07/2017',status: 'active'},
-	  {plane_id: plane8,make: ' Boeing', model: '747-400',flight_cycles:10000, range:8357,location:"Heathrow",last_service:'17/07/2017',status: 'active'},
-      {plane_id: plane9 ,make: ' Airbus', model: 'A321',flight_cycles:5950 , range:10000,location: "Heathrow",last_service:'17/07/2017',status: 'being fixed'}]
+	  {plane_id: plane3,make: ' Boeing', model: '737-800',flight_cycles:34000, range:5665, location:"Luton",last_service:'17/07/2011',status: 'active'},
+	  {plane_id: plane4,make: ' Boeing', model: '737-800',flight_cycles:10000, range:5665, location: "Luton",last_service:'17/07/2017',status: 'active'},
+	  {plane_id: plane5,make: ' Boeing', model: '747-830',flight_cycles:10000, range:10000, location: "Gatwick",last_service:'17/07/2017',status:'active'},
+	  {plane_id: plane6,make: ' Boeing', model: '737-800',flight_cycles:10000, range:5665 , location:"Gatwick",last_service:'17/07/2017',status: 'active'},
+	  {plane_id: plane7,make: ' Boeing', model: '747-400',flight_cycles:10000, range:8357,location: "Gatwick",last_service:'17/07/2017',status: 'active'},
+	  {plane_id: plane8,make: ' Boeing', model: '747-400',flight_cycles:10000, range:8357,location:"City",last_service:'17/07/2017',status: 'active'},
+      {plane_id: plane9 ,make: ' Airbus', model: 'A321',flight_cycles:5950 , range:10000,location: "City",last_service:'17/07/2017',status: 'active'}]
 
   //This will hold details of any customer who books a flight and will keep their details stroed on the system for the next 3 months 
   
@@ -162,23 +172,63 @@ MongoClient.connect(url, function(err, db) {
   var flight10id = idgenerator(9999);
   var flight11id = idgenerator(9999);
   var flight12id = idgenerator(9999);
+  var flight13id = idgenerator(9999);
+  var flight14id = idgenerator(9999);
+  var flight15id = idgenerator(9999);
+  var flight16id = idgenerator(9999);
+  var flight17id = idgenerator(9999);
+  var flight18id = idgenerator(9999);
+  var flight19id = idgenerator(9999);
+  var flight20id = idgenerator(9999);
+  var flight21id = idgenerator(9999);
+  var flight22id = idgenerator(9999);
+  var flight23id = idgenerator(9999);
+  var flight24id = idgenerator(9999); 
+  var flight25id = idgenerator(9999);
+  var flight26id = idgenerator(9999);
+  var flight27id = idgenerator(9999);
+  var flight28id = idgenerator(9999);
+  var flight29id = idgenerator(9999); 
+  var flight30id = idgenerator(9999);
+  var flight31id = idgenerator(9999); 
   
   
 
-  var Flights = [{ flight_id: flight1id,departing_Date_time: "10/11/2018, 15:00", departing_airport:"Heathrow", destination_airport:"Charles Digor",estimated_journey_time: 4, destination_arival_date_time: "N/A",  plane_assigned: plane1 ,pilot_id:johnpilotid },
- 	            {flight_id: flight2id, departing_Date_time: "14/11/2018, 21:00", departing_airport:"Charles Digor", destination_airport:"Heathrow",estimated_journey_time: 4, destination_arival_date_time: "N/A",  plane_assigned: plane1 ,pilot_:johnpilotid },
- 	            {flight_id: flight3id, departing_Date_time: "18/11/2018, 15:00", departing_airport:"Gatwick", destination_airport:"Nikola Tesla",estimated_journey_time: 9, destination_arival_date_time: "N/A",  plane_assigned: plane6, pilot_assigned:hannahpilotid},
- 	            {flight_id: flight4id, departing_Date_time: "22/11/2018, 15:00", departing_airport:"Nikola Tesla", destination_airport:"Gatwick", estimated_journey_time: 9, destination_arival_date_time: "N/A",  plane_assigned: plane5 ,pilot_assigned:amypilotid},
- 	            {flight_id: flight5id,departing_Date_time: "26/11/2018, 15:00", departing_airport:":Luton",  destination_airport:"John F. Kennedy",estimated_journey_time: 9, destination_arival_date_time: "N/A",  plane_assigned: plane2,pilot_assigned:hannahpilotid},
- 	            {flight_id: flight6id, departing_Date_time: "30/11/2018, 15:00", departing_airport:"John F. Kennedy", destination_airport:"Nikola Tesla", estimated_journey_time: 9, destination_arival_date_time: "N/A",  plane_assigned:plane7,pilot_assigned:michaelpilotid},
- 	            {flight_id: flight8id, departing_Date_time: "04/12/2018, 15:00", departing_airport:"City", destination_airport:"Bangor", estimated_journey_time: 9, destination_arival_date_time: "N/A",  plane_assigned: plane4 ,pilot_assigned:amypilotid},
- 	            {flight_id: flight9id, departing_Date_time: "08/12/2018, 15:00", departing_airport:"Heathrow", destination_airport:"Charles Digor", estimated_journey_time: 9, destination_arival_date_time: "N/A",  plane_assigned: plane3 ,pilot_assigned:hannahpilotid},
- 	            {flight_id: flight10id, departing_Date_time: "12/12/2018, 15:00", departing_airport:"Gatwick",  destination_airport:"Barcelona",estimated_journey_time: 9, destination_arival_date_time: "N/A",  plane_assigned: plane1 ,pilot_assigned:michaelpilotid},
- 	            {flight_id: flight11id, departing_Date_time: "16/12/2018, 15:00", departing_airport:"Barcelona",  destination_airport:"Gatwick",estimated_journey_time: 9, destination_arival_date_time: "N/A",  plane_assigned: plane4 ,pilot_assigned:michaelpilotid},
- 	            {flight_id: flight12id, departing_Date_time: "20/12/2018, 15:00", departing_airport:"City",  destination_airport:"John F. Kennedy",estimated_journey_time: 9, destination_arival_date_time: "N/A",  plane_assigned: plane1 ,pilot_assigned:johnpilotid },
- 	            {flight_id: flight12id, departing_Date_time: "24/12/2018, 15:00", departing_airport:"John F. Kennedy",  destination_airport:"City",estimated_journey_time: 9, destination_arival_date_time: "N/A",  plane_assigned: plane1 ,pilot_assigned:johnpilotid }]
 
+  
 
+  var Flights = [{ 
+	             flight_id: flight1id, departing_Date_time: "01/11/2018, 15:00", month_year:1118, departing_airport:"Heathrow",            destination_airport:"Charles Digor",    distance: 344,estimated_journey_time: 4, destination_arival_date_time: "N/A",  plane_assigned: plane1 ,pilot_id:johnpilotid },
+ 	            {flight_id: flight2id, departing_Date_time: "03/11/2018, 21:00", month_year:1118, departing_airport:"Charles Digor",       destination_airport:"Heathrow",         distance:344,estimated_journey_time: 4, destination_arival_date_time: "N/A",  plane_assigned: plane1 ,pilot_:johnpilotid },
+ 	            {flight_id: flight3id, departing_Date_time: "05/11/2018, 15:00", month_year:1118, departing_airport:"Gatwick",             destination_airport:"Nikola Tesla",     distance:1700,estimated_journey_time: 9, destination_arival_date_time: "N/A",  plane_assigned: plane6, pilot_assigned:hannahpilotid},
+ 	            {flight_id: flight4id, departing_Date_time: "07/11/2018, 15:30", month_year:1118, departing_airport:"Nikola Tesla",        destination_airport:"Gatwick",          distance:1700, estimated_journey_time: 9, destination_arival_date_time: "N/A",  plane_assigned: plane5 ,pilot_assigned:amypilotid},
+ 	            {flight_id: flight5id, departing_Date_time: "09/11/2018, 15:00", month_year:1118, departing_airport:":Luton",              destination_airport:"John F. Kennedy",  distance:5585 ,estimated_journey_time: 9, destination_arival_date_time: "N/A",  plane_assigned: plane2,pilot_assigned:hannahpilotid},
+ 	            {flight_id: flight6id, departing_Date_time: "11/11/2018, 15:00", month_year:1118, departing_airport:"John F. Kennedy",     destination_airport:"Luton",  distance:5585,estimated_journey_time: 9, destination_arival_date_time: "N/A",  plane_assigned:plane7,pilot_assigned:michaelpilotid},
+ 	            {flight_id: flight8id, departing_Date_time: "13/11/2018, 15:00", month_year:1118, departing_airport:"City",                destination_airport:"Bangor",  distance:262,estimated_journey_time: 9, destination_arival_date_time: "N/A",  plane_assigned: plane4 ,pilot_assigned:amypilotid},
+ 	            {flight_id: flight9id, departing_Date_time: "15/11/2018, 15:00", month_year:1118, departing_airport:"Bangor",              destination_airport:"City", distance:262, estimated_journey_time: 9, destination_arival_date_time: "N/A",  plane_assigned: plane3 ,pilot_assigned:hannahpilotid},
+ 	            {flight_id: flight10id,departing_Date_time: "17/11/2018, 15:00", month_year:1118, departing_airport:"Gatwick",             destination_airport:"Barcelona", distance:1139,estimated_journey_time: 9, destination_arival_date_time: "N/A",  plane_assigned: plane1 ,pilot_assigned:michaelpilotid},
+ 	            {flight_id: flight11id,departing_Date_time: "19/11/2018, 15:00", month_year:1118, departing_airport:"Barcelona",           destination_airport:"Gatwick", distance:1139,estimated_journey_time: 9, destination_arival_date_time: "N/A",  plane_assigned: plane4 ,pilot_assigned:michaelpilotid},
+ 	            {flight_id: flight12id,departing_Date_time: "21/11/2018, 15:00", month_year:1118, departing_airport:"City",                destination_airport:"John F. Kennedy", distance:5585,estimated_journey_time: 9, destination_arival_date_time: "N/A",  plane_assigned: plane1 ,pilot_assigned:johnpilotid },
+ 	            {flight_id: flight13id,departing_Date_time: "23/11/2018, 15:00", month_year:1118, departing_airport:"John F. Kennedy",     destination_airport:"City", distance:5585,estimated_journey_time: 9, destination_arival_date_time: "N/A",  plane_assigned: plane1 ,pilot_assigned:johnpilotid },
+                {flight_id: flight14id,departing_Date_time: "25/11/2018, 15:00", month_year:1118, departing_airport:"Heathrow",            destination_airport:"LAX", distance: 8760 ,estimated_journey_time: 4, destination_arival_date_time: "N/A",  plane_assigned: plane1 ,pilot_id:johnpilotid },
+                {flight_id: flight15id,departing_Date_time: "27/11/2018, 21:00", month_year:1118, departing_airport:"LAX",                 destination_airport:"Heathrow", distance:8760,estimated_journey_time: 4, destination_arival_date_time: "N/A",  plane_assigned: plane1 ,pilot_:johnpilotid },
+                {flight_id: flight16id,departing_Date_time: "29/11/2018, 15:00", month_year:1118, departing_airport:"Gatwick",             destination_airport:"Nikola Tesla", distance:1700,estimated_journey_time: 9, destination_arival_date_time: "N/A",  plane_assigned: plane6, pilot_assigned:hannahpilotid},
+                {flight_id: flight17id,departing_Date_time: "01/12/2018, 15:00", month_year:1218, departing_airport:"Nikola Tesla",        destination_airport:"Gatwick", distance:1700, estimated_journey_time: 9, destination_arival_date_time: "N/A",  plane_assigned: plane5 ,pilot_assigned:amypilotid},
+                {flight_id: flight18id,departing_Date_time: "03/12/2018, 15:00", month_year:1218, departing_airport:":Luton",              destination_airport:"John F. Kennedy", distance:5585 ,estimated_journey_time: 9, destination_arival_date_time: "N/A",  plane_assigned: plane2,pilot_assigned:hannahpilotid},
+                {flight_id: flight19id,departing_Date_time: "05/12/2018, 15:00", month_year:1218, departing_airport:"John F. Kennedy",     destination_airport:"Luton",  distance:5585,estimated_journey_time: 9, destination_arival_date_time: "N/A",  plane_assigned:plane7,pilot_assigned:michaelpilotid},
+                {flight_id: flight20id,departing_Date_time: "07/12/2018, 15:00", month_year:1218, departing_airport:"City",                destination_airport:"Bangor",  distance:262,estimated_journey_time: 9, destination_arival_date_time: "N/A",  plane_assigned: plane4 ,pilot_assigned:amypilotid},
+                {flight_id: flight21id,departing_Date_time: "09/12/2018, 15:00", month_year:1218, departing_airport:"Heathrow",            destination_airport:"LAX", distance:8760, estimated_journey_time: 9, destination_arival_date_time: "N/A",  plane_assigned: plane3 ,pilot_assigned:hannahpilotid},
+                {flight_id: flight22id,departing_Date_time: "11/12/2018, 15:00", month_year:1218, departing_airport:"LAX",                 destination_airport:"Heathrow", distance:8760,estimated_journey_time: 9, destination_arival_date_time: "N/A",  plane_assigned: plane1 ,pilot_assigned:michaelpilotid},
+                {flight_id: flight23id,departing_Date_time: "13/12/2018, 15:00", month_year:1218, departing_airport:"Luton",               destination_airport:"AMS", distance:358,estimated_journey_time: 9, destination_arival_date_time: "N/A",  plane_assigned: plane4 ,pilot_assigned:michaelpilotid},
+                {flight_id: flight24id,departing_Date_time: "15/12/2018, 15:00", month_year:1218, departing_airport:"AMS",                 destination_airport:"Luton", distance:358,estimated_journey_time: 9, destination_arival_date_time: "N/A",  plane_assigned: plane1 ,pilot_assigned:johnpilotid },
+                {flight_id: flight25id,departing_Date_time: "17/12/2018, 15:00", month_year:1218, departing_airport:"Gatwick",             destination_airport:"Singapore Changor", distance: 10880,estimated_journey_time: 9, destination_arival_date_time: "N/A",  plane_assigned: plane1 ,pilot_assigned:johnpilotid },
+                {flight_id: flight26id,departing_Date_time: "19/12/2018, 15:00", month_year:1218, departing_airport:"Singapore Changor",   destination_airport:"Gatwick", distance: 10880,estimated_journey_time: 4, destination_arival_date_time: "N/A",  plane_assigned: plane1 ,pilot_id:johnpilotid },
+                {flight_id: flight27id,departing_Date_time: "21/12/2018, 21:00", month_year:1218, departing_airport:"Luton",               destination_airport:"SFO", distance:8619 ,estimated_journey_time: 4, destination_arival_date_time: "N/A",  plane_assigned: plane1 ,pilot_:johnpilotid },
+                {flight_id: flight28id,departing_Date_time: "23/12/2018, 15:00", month_year:1218, departing_airport:"SFO",                 destination_airport:"Luton", distance:8619,estimated_journey_time: 9, destination_arival_date_time: "N/A",  plane_assigned: plane6, pilot_assigned:hannahpilotid},
+                {flight_id: flight29id,departing_Date_time: "25/12/2018, 15:00", month_year:1218, departing_airport:"Heathrow",            destination_airport:"Adolfo-Suarez", distance:1700, estimated_journey_time: 9, destination_arival_date_time: "N/A",  plane_assigned: plane5 ,pilot_assigned:amypilotid},
+                {flight_id: flight30id,departing_Date_time: "27/12/2018, 15:00", month_year:1218, departing_airport:":Adolfo-Suarez",      destination_airport:"Heathrow", distance:5585 ,estimated_journey_time: 9, destination_arival_date_time: "N/A",  plane_assigned: plane2,pilot_assigned:hannahpilotid},
+                {flight_id: flight31id,departing_Date_time: "29/12/2018, 15:00", month_year:1218, departing_airport:"City",                destination_airport:"Munich",  distance:5585,estimated_journey_time: 9, destination_arival_date_time: "N/A",  plane_assigned:plane7,pilot_assigned:michaelpilotid}]
+               
   
 
 
@@ -186,14 +236,24 @@ MongoClient.connect(url, function(err, db) {
   	 {date_time:'03/10/2018', Booke_name:'Cassandra Nevermind',           Passengers:'Cassandra Nevermind',                             Journey:{flight_id:flight1id, flight_clas:'First', seat:'3a'}, cost: 10000 },
   	 {date_time:'03/10/2018', Booke_name:'Bethany Chowdary',              Passengers:'Liam Chowdry,Timothey Chowdry',                   Journey:{flight_id:flight4id,flight_clas:'Economy', seat:'12t,12r'}, cost: 790 },
   	 {date_time:'04/10/2018', Booke_name:'Sandra White',                  Passengers:'Sandra White',                                    Journey:[{flight_id:flight1id, flight_clas:'Economy', seat:'12t'}, {flight_id:flight1id, flight_clas:'Economy', seat:'12t'}], cost: 800 },
-  	 {date_time:'07/10/2018', Booke_name:'Andrew Whitmore',               Passengers:'Andrew Whitmore, Stacy Whitmore',                 Journey:{flight_id:flight9id, flight_clas:'Economy', seat:'12t,5i'}, cost: 10000 },
-  	 {date_time:'12/10/2018', Booke_name:'Bonjovi Preeti',                Passengers:'Bonjovi Preeti, Mary-Amme Preeti',                Journey:[{flight_id:flight5id, flight_clas:'Economy', seat:'3a,3b'},{flight_id:flight4id, flight_clas:'Business', seat:'12b,12c'}], cost: 10000 },
-  	 {date_time:'20/10/2018', Booke_name:'Micheal Daphne',                Passengers:'Petra Vodoplav',                                  Journey:{flight_id:flight6id,  flight_clas:'First', seat:'10f'}, cost:250 },
-  	 {date_time:'0/10/2018',  Booke_name:'Crocodile Dundee',              Passengers:'Jibola Babatunde,Mary Babatunde,Crocodile Dundee', Journey:{flight_id:flight12id,flight_clas:'First', seat:'3a,3b,3c'}, cost: 10000 },
-  	 {date_time:'03/10/2018', Booke_name:'Cassandra Nevermind',           Passengers:'Lola crinklewood',                                Journey:{flight_id:flight4id,flight_clas:'First', seat:'3a'}, cost: 10000 },
-  	 {date_time:'03/10/2018', Booke_name:'Cassandra Nevermind',           Passengers:'Harry Trotter',                                   Journey:{flight_id:flight2id, flight_clas:'First', seat:'3a'}, cost: 10000 },
-  	 {date_time:'03/10/2018', Booke_name:'Cassandra Nevermind',           Passengers:'Thor Ragnorak',                                   Journey:{flight_id:flight3id, flight_clas:'Business', seat:'12t'}, cost:5000 }]
-             
+  	 {date_time:'04/10/2018', Booke_name:'Andrew Whitmore',               Passengers:'Andrew Whitmore, Stacy Whitmore',                 Journey:{flight_id:flight9id, flight_clas:'Economy', seat:'12t,5i'}, cost: 10000 },
+  	 {date_time:'06/10/2018', Booke_name:'Bonjovi Preeti',                Passengers:'Bonjovi Preeti, Mary-Amme Preeti',                Journey:[{flight_id:flight5id, flight_clas:'Economy', seat:'3a,3b'},{flight_id:flight4id, flight_clas:'Business', seat:'12b,12c'}], cost: 10000 },
+  	 {date_time:'06/10/2018', Booke_name:'Micheal Daphne',                Passengers:'Petra Vodoplav',                                  Journey:{flight_id:flight6id,  flight_clas:'First', seat:'10f'}, cost:250 },
+  	 {date_time:'07/10/2018',  Booke_name:'Crocodile Dundee',             Passengers:'Jibola Babatunde,Mary Babatunde,Crocodile Dundee',Journey:{flight_id:flight12id,flight_clas:'First', seat:'3a,3b,3c'}, cost: 10000 },
+  	 {date_time:'08/10/2018', Booke_name:'Lola crinklewood',              Passengers:'Lola crinklewood',                                Journey:{flight_id:flight4id,flight_clas:'First', seat:'3a'}, cost: 10000 },
+  	 {date_time:'08/10/2018', Booke_name:'Harry Trotter',                 Passengers:'Harry Trotter',                                   Journey:{flight_id:flight2id, flight_clas:'First', seat:'3a'}, cost: 10000 },
+  	 {date_time:'09/10/2018', Booke_name:'Thor Ragnorak',                 Passengers:'Thor Ragnorak',                                   Journey:{flight_id:flight3id, flight_clas:'Business', seat:'12t'}, cost:5000 },
+     {date_time:'11/10/2018', Booke_name:'Mr Blobby',                     Passengers:'Mr Blobby',                                       Journey:{flight_id:flight1id, flight_clas:'First', seat:'3a'}, cost: 10000 },
+	 {date_time:'11/10/2018', Booke_name:'Bethany Chowdary',              Passengers:'Liam Chowdry,Timothey Chowdry',                   Journey:{flight_id:flight4id,flight_clas:'Economy', seat:'12t,12r'}, cost: 790 },
+	 {date_time:'11/10/2018', Booke_name:'Sandra Black',                  Passengers:'Sandra Black',                                    Journey:[{flight_id:flight1id, flight_clas:'Economy', seat:'12t'}, {flight_id:flight1id, flight_clas:'Economy', seat:'12t'}], cost: 800 },
+	 {date_time:'12/10/2018', Booke_name:'Jonathan Sister',               Passengers:'Jonathan Sister, Jonathans Sister',               Journey:{flight_id:flight9id, flight_clas:'Economy', seat:'12t,5i'}, cost: 10000 },
+	 {date_time:'13/10/2018', Booke_name:'Bonjovi Preeti',                Passengers:'Bonjovi Preeti, Mary-Amme Preeti',                Journey:[{flight_id:flight5id, flight_clas:'Economy', seat:'3a,3b'},{flight_id:flight4id, flight_clas:'Business', seat:'12b,12c'}], cost: 10000 },
+	 {date_time:'14/10/2018', Booke_name:'Micheal Edward',                Passengers:'Sasha Edward',                                    Journey:{flight_id:flight6id,  flight_clas:'First', seat:'10f'}, cost:250 },
+	 {date_time:'15/10/2018',  Booke_name:'Aqua Man',                     Passengers:'Aqua Man, Aqua Woman ',                           Journey:{flight_id:flight12id,flight_clas:'First', seat:'3a,3b,3c'}, cost: 10000 },
+	 {date_time:'18/10/2018', Booke_name:'Cassandra Nevermind',           Passengers:'Lola crinklewood',                                Journey:{flight_id:flight4id,flight_clas:'First', seat:'3a'}, cost: 10000 },
+	 {date_time:'19/10/2018', Booke_name:'Cassandra Nevermind',           Passengers:'Harry Trotter',                                   Journey:{flight_id:flight2id, flight_clas:'First', seat:'3a'}, cost: 10000 },
+	 {date_time:'20/10/2018', Booke_name:'Cassandra Nevermind',           Passengers:'Thor Ragnorak',                                   Journey:{flight_id:flight3id, flight_clas:'Business', seat:'12t'}, cost:5000 }]
+               
    
 
 
@@ -204,9 +264,7 @@ MongoClient.connect(url, function(err, db) {
   
   
   
-	 
-  
-	            
+
 	            
   
   dbo.collection("employees").insertMany(myEmployees, {w:1}, function(err, res) {
