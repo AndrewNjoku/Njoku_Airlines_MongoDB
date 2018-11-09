@@ -37,32 +37,35 @@ MongoClient.connect(url, function(err, db) {
   
   // Global variables 
   
-
-
+  
+//The price of jet fuel as of January 2015 is as follows:
+  // found estimate saying that boeing B747 consumes 12 liters of fuel per Kilometer
+   // 1 litre = 0.3125 pence (pound sterling)
+ 
+  var fuelcostperlitre =0.3125;
+  
   var TotalYearlySalary;
   
-  var TotalMonthlySalary=TotalYearlySalary/12;
+  // These are fixed costs and are per month
   
-  // we will give a wild number to this since i have no idea
-
   var rentoffacilitiespermonth=10000;
 
   var upkeepestimate=2000;
 
-  var vehiclemaintainenceestimate=2000;
+  
+  //estimate of maintainence costs per km based on a wild estimate of 1000 pounds per 1000 km
+  
+  var vehiclemaintainenceestimate=1;
   
   
 
 
-  // The price of jet fuel as of January 2015 is as follows:
-  // found estimate saying that boeing B747 consumes 12 liters of fuel per Kilometer
-   // 1 litre = 0.3125 pence (pound sterling)
- 
+  
 
   var fuelaccurateestimate=0;
   
   
-  var airportcosts=rentoffacilities+upkeepestimate+vehiclemaintainenceestimate+fuelaccurateestimate;
+ // var airportcosts=rentoffacilities+upkeepestimate+vehiclemaintainenceestimate+fuelaccurateestimate;
   
   
   
@@ -103,15 +106,94 @@ MongoClient.connect(url, function(err, db) {
  //then calculating the total and printing also
  
  
- function calculateTotalFuelCostEstimate(){
+ 
+ 
+ //!! if i have time i want to implement date and time properly in my database so that i can,
+ // include a method decleration which will include an int variable dictating a start and end date 
+ //for me to calculate.
+ 
+
+ 
+ 
+
+ 
+ 
+ var arrayofdistancekm=[];
+ var totaldistancetraveled=0;
+ 
+ 
+ 
+ 
+ 
+ function calculatefligthCostsForMonth(a){
+	 
+	 //function scope variables
+	 
+	 var fuelusedinlitres = totaldistancetraveled*12
+	 var fuelcost = fuelusedinlitres*fuelcostperlitre;
+	 //calculating maintainence costs using a estimate of maintainence cost per 1000km traveled (not very accurate but hard to estimate)
+	 var maintainencecostforthismonth= totaldistancetraveled*vehiclemaintainenceestimate;
+	 var totalflightcostsformonth;
 	 
 	 
-	 //first we need to get the total number of KM booked for travel
-	 dbo.collection("flights").find({}, {projection})
+	 
+	 // we can get maintainence + fuel costs + Runwayhire from this query 
+	 // we are using the assumption that Njoku_Airlines uses the departing and destination airport 
+	 //for two hours both ways.
 	 
 	 
 	 
-	 
+	 dbo.collection("flights").find({"month_year":a}, {projection:{_id: 0,departing_airport: 1, destination_airport:1 ,distance:1}}).toArray(function(err,result){
+		 
+		 
+		 print(result)
+		 
+		 
+		 //This foreach loop will output an array of departing airports and an array of 
+		 
+		  result.forEach(	
+		    		
+			      function(row) {
+			    	  arrayofdistancekm.push(row.distance);
+			      });
+		 
+		 result.forEach(	
+		    		
+			      function(row) {
+			    	  arrayofdistancekm.push(row.distance);
+			      });
+		 
+	
+		 totaldistancetraveled=arrayofdistancekm.reduce(add, 0);
+		 
+		 
+		 //calculating fuel cost here 
+		 
+	
+		 
+		 //calculating airport runway hire costs here 
+		 
+		 
+		 
+		 //total flight related costs
+		
+		 
+		 print("");
+		 print("The total distance travelled is: " + totaldistancetraveled +" KM in month/year :" + a);
+		 print("");
+		 print("This equates to: " + fuelusedinlitres + "  estimated litres of fuel and a total estimated cost of:" + fuelcost+ "Pounds Sterling" );
+		 print("");
+		 print("A rough estimate of the maintainence costs involved in this month are :" + maintainencecostforthismonth);
+		 
+		 
+		 print("Total flight related costs for the month/year"+ a + "is:" totalflightcostsformonth)
+		 //
+
+		 
+	 });
+ 
+ 
+
 	 
  };
  
@@ -154,7 +236,10 @@ MongoClient.connect(url, function(err, db) {
  //Their salary in an arryay
  //the result of the addition of everyone salary yearly
  
-calculateWagePerYear();
+//calculateWagePerYear();
+ 
+ 
+ calculatefligthCostsForMonth(1118);
   
   
   
