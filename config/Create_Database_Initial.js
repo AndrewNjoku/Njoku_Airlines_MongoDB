@@ -1,24 +1,5 @@
 
-var MongoClient = require('mongodb').MongoClient;
 
-var ObjectId = require('mongodb');
-
-var url = "mongodb://localhost:27017/mydb";
-
-// This is the base script to be used to populate my database. It excludes customer bookings since i wish to tie the bookings to existing fields populated in this document.
-// I plan to do this using queries and logic which is in line with a seperate deliverabe and i want to seperate each deliverable to make things
-//easier to understand 
-
-
-
-MongoClient.connect(url, function(err, db) {
-  if (err) throw err;
-  console.log("Database connection complete!");
-  
-  
-  var dbo = db.db("mydb");
-  
-  
   
   
   //quick function to generate ID's so i dont have to assign myself
@@ -39,7 +20,7 @@ MongoClient.connect(url, function(err, db) {
   var michaelpilotid = idgenerator(9999);
   
   
-  var myEmployees = [
+  exports.employees = [
 	  
 	    { pilot_id: johnpilotid, name: 'John',role:'Pilot',fit_for_flight:'17-03-2001', address: { street: '139 Highbury Grove', town:'London', postcode: 'n5 1hp'},record: { soe: '03/05/2008',holiday_remaining: 30, status: 'working', rtw: 'N/A'},salary: 54000},
 	    { pilot_id: peterpilotid, name: 'Peter',role:'Pilot',fit_for_flight:'02-05-2001',address: { street: '139 Highbury Grove', town:'London', postcode: 'n5 1hp'},record: { soe: '18/10/2001',holiday_remaining: 30, status: 'holiday', rtw: '05/11/2018'},salary: 54000},
@@ -73,7 +54,7 @@ MongoClient.connect(url, function(err, db) {
   // This array will hold a list of airports that my airline travels to or from 
   
    
-  var myAirports = [{ name: ' Heathrow', location: ' London,England', ruc: 100},
+ exports.airports= [{ name: ' Heathrow', location: ' London,England', ruc: 100},
 	                 {name: ' Luton', location: ' London,England', ruc: 59},
 	                 {name: ' City', location: ' London,England', ruc: 87},
 	                 {name: ' Nikola Tesla', location: ' Belgrade,Serbia', ruc: 40},
@@ -121,7 +102,7 @@ MongoClient.connect(url, function(err, db) {
   var plane9 = idgenerator(9999);
   
   
-  var planes = [
+ exports.planes= [
 	  
 	  { plane_id: plane1,make: 'Boeing', model: '737-800',mileage:10000, range:5665, location: "Heathrow",last_service:'17/07/2017',status:'active'},
 	  {plane_id: plane2,make: ' Boeing', model: '767-300ER',flight_cycles:34000, range:10000, location:"Heathrow",last_service:'17/07/2013',status: 'active', notes: "decomission due in 1000 miles, keep an eye"},
@@ -197,7 +178,7 @@ MongoClient.connect(url, function(err, db) {
 
   
 
-  var Flights = [{ 
+  exports.flights= [{
 	             flight_id: flight1id, departing_Date_time: "01/11/2018, 15:00", month_year:1118, departing_airport:"Heathrow",            destination_airport:"Charles Digor",    distance: 344,estimated_journey_time: 4, destination_arival_date_time: "N/A",  plane_assigned: plane1 ,pilot_id:johnpilotid },
  	            {flight_id: flight2id, departing_Date_time: "03/11/2018, 21:00", month_year:1118, departing_airport:"Charles Digor",       destination_airport:"Heathrow",         distance:344,estimated_journey_time: 4, destination_arival_date_time: "N/A",  plane_assigned: plane1 ,pilot_:johnpilotid },
  	            {flight_id: flight3id, departing_Date_time: "05/11/2018, 15:00", month_year:1118, departing_airport:"Gatwick",             destination_airport:"Nikola Tesla",     distance:1700,estimated_journey_time: 9, destination_arival_date_time: "N/A",  plane_assigned: plane6, pilot_assigned:hannahpilotid},
@@ -232,7 +213,7 @@ MongoClient.connect(url, function(err, db) {
   
 
 
-  var booking =[
+  exports.bookings =[
   	 {date_time:'03/10/2018', Booke_name:'Cassandra Nevermind',           Passengers:'Cassandra Nevermind',                             Journey:{flight_id:flight1id, flight_clas:'First', seat:'3a'}, cost: 10000 },
   	 {date_time:'03/10/2018', Booke_name:'Bethany Chowdary',              Passengers:'Liam Chowdry,Timothey Chowdry',                   Journey:{flight_id:flight4id,flight_clas:'Economy', seat:'12t,12r'}, cost: 790 },
   	 {date_time:'04/10/2018', Booke_name:'Sandra White',                  Passengers:'Sandra White',                                    Journey:[{flight_id:flight1id, flight_clas:'Economy', seat:'12t'}, {flight_id:flight1id, flight_clas:'Economy', seat:'12t'}], cost: 800 },
@@ -265,67 +246,5 @@ MongoClient.connect(url, function(err, db) {
   
   
 
-	            
-  
-  dbo.collection("employees").insertMany(myEmployees, {w:1}, function(err, res) {
-	    if (err) throw err;
-	    console.log("Employees Inserted: " + res.insertedCount);
- 
-   });
-  
-  //insert the airports into the table
-  
-dbo.collection("airports").insertMany(myAirports, function(err, res){
-	
-	if(err) throw err;
-	console.log("Airports Inserted" + res.insertedCount)
-	
-	
-});
 
-
-// i will output the plain ID via the terminal , but can be output to a document. This is for use by me so i have a list of ids in order to add 
-//to input this to fields in linked documents. Later if i have time i can create a query 
-dbo.collection("planes").insertMany(planes, {w:1}, function(err, res){
-	
-	if(err) throw err;
-	console.log("Planes Inserted" + res.insertedCount)
-	
-	
-});
-
-
-
- dbo.collection("flights").insertMany(Flights, {w:1}, function(err, res){
- 	
- 	if(err) throw err;
- 	
- 	console.log("flights Inserted" + res.insertedCount)	
- 	
- });
- 
- 
- 
- dbo.collection("bookings").insertMany(booking, {w:1}, function(err, res){
-	
-	if(err) throw err;
-	
-	console.log("bookings inserted" + res.insertedCount)
-	
-	
-});
- 
-
-
-
-// later on in a seperate query javascript document i will need to add some document ID's to be assigned to soome fields here
-// i want to do an update using a query to find pilots that are available /planes that are avaiable
-
-
-
-
-
-db.close();
-	  });
- 
  
